@@ -5,7 +5,6 @@ import sys
 import time
 import timeit
 # from numba import jit
-
 try:
     imp.find_module('mpi4py')
     # imp.find_module('line_profiler')
@@ -38,7 +37,6 @@ def Pi(num_steps):
     start = time.time()
     
     sum = loop(num_steps)
-    
 
     pi = sum / num_steps
     t1 = MPI.Wtime()-t0
@@ -58,9 +56,6 @@ def opt_Pi(num_steps):
     if rank == 0:
         pi = sum / num_steps
         print "\n\nPi with %d steps is %f in %f secs\n\n" % (num_steps, pi, t1)
-
-
-
 
 def hello_mpi():
     
@@ -122,20 +117,5 @@ def mpi_reduce():
     if rank == 0:
         print "Rank 0 worked out the total %d" % sum
 
-# if rank == 0:
-#     print 'Parallel time:'
-#     tp = timeit.Timer("opt_Pi(10000)","from __main__ import opt_Pi")
-#     print tp.timeit(number=10)
-
-#     print 'Serial time:'
-#     ts = timeit.Timer("Pi(10000)","from __main__ import Pi")
-#     print ts.timeit(number=10)
-    # hello_mpi()
-    # hello_p2p()
-    # hello_bcast()
-    # sum_p2p()
-    # mpi_reduce()
-
 if __name__ == '__main__':
-    Pi(10000)
-    # opt_Pi(10000)
+    opt_Pi(2000000)
